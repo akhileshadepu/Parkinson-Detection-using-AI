@@ -86,10 +86,23 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
+**Dependencies included:**
+
+- TensorFlow 2.15.0 - Deep learning framework
+- Keras 2.15.0 - Neural network API
+- OpenCV 4.12.0.88 - Image processing
+- NumPy 2.2.6 - Numerical computing
+- Scikit-learn 1.7.2 - Machine learning utilities
+- Flask 3.1.2 - Web framework
+- Pillow 12.0.0 - Image manipulation
+- SciPy 1.16.3 - Scientific computing
+- h5py 3.15.1 - HDF5 file format support
+- Joblib 1.5.2 - Serialization
+
 ### Step 4: Verify Installation
 
 ```bash
-python -c "import tensorflow; import flask; print('All packages installed successfully!')"
+python -c "import tensorflow; import flask; import cv2; print('✅ All packages installed successfully!')"
 ```
 
 ## 💻 Usage
@@ -213,19 +226,46 @@ F1-score: 0.9561
 
 ## 🛠️ Technologies Used
 
-| Technology         | Purpose                    |
-| ------------------ | -------------------------- |
-| **Python 3.11**    | Programming language       |
-| **TensorFlow 2.x** | Deep learning framework    |
-| **Keras**          | Neural network API         |
-| **OpenCV**         | Image processing           |
-| **NumPy**          | Numerical computing        |
-| **Scikit-learn**   | Machine learning utilities |
-| **Flask**          | Web framework              |
-| **Pillow**         | Image manipulation         |
-| **Jinja2**         | Template engine            |
+| Technology       | Version   | Purpose                                |
+| ---------------- | --------- | -------------------------------------- |
+| **Python**       | 3.11      | Programming language                   |
+| **TensorFlow**   | 2.15.0    | Deep learning framework                |
+| **Keras**        | 2.15.0    | Neural network API                     |
+| **OpenCV**       | 4.12.0.88 | Image processing and computer vision   |
+| **NumPy**        | 2.2.6     | Numerical computing and arrays         |
+| **Scikit-learn** | 1.7.2     | Machine learning utilities and metrics |
+| **Flask**        | 3.1.2     | Web framework                          |
+| **Pillow**       | 12.0.0    | Image manipulation                     |
+| **SciPy**        | 1.16.3    | Scientific computing                   |
+| **h5py**         | 3.15.1    | HDF5 file format support               |
+| **Joblib**       | 1.5.2     | Parallel computing and serialization   |
 
-## 🔧 Configuration
+## � Dependencies & Installation
+
+All required packages are listed in `requirements.txt`. To install them:
+
+```bash
+# Activate your virtual environment first
+# Windows: env\Scripts\activate
+# macOS/Linux: source env/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Verify installation
+pip list
+```
+
+**Key Dependencies:**
+
+- **Deep Learning**: TensorFlow/Keras for model training and inference
+- **Image Processing**: OpenCV and Pillow for image manipulation
+- **Data Processing**: NumPy, SciPy for numerical operations
+- **ML Utilities**: Scikit-learn for metrics and preprocessing
+- **Web Framework**: Flask for the web interface
+- **File I/O**: h5py for saving/loading model weights
+
+## �🔧 Configuration
 
 ### Model Hyperparameters
 
@@ -277,7 +317,53 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 This tool is designed for **educational and research purposes only** and should **NOT** be used as a medical diagnostic tool. Always consult with healthcare professionals for medical diagnosis and treatment. The model predictions are probabilistic and may have limitations.
 
-## 📞 Support
+## � Troubleshooting
+
+### Issue: TensorFlow installation fails
+
+**Solution**: Install CUDA toolkit and cuDNN for GPU support, or use CPU-only version:
+
+```bash
+pip install tensorflow-cpu
+```
+
+### Issue: Model file not found (parkinson_detector.h5)
+
+**Solution**: Train the model first:
+
+```bash
+python train.py
+```
+
+### Issue: Port 5000 already in use
+
+**Solution**: Change the port in `app.py`:
+
+```python
+app.run(debug=True, port=5001)
+```
+
+### Issue: Image not recognized
+
+**Solution**: Ensure the image is in PNG, JPG, or JPEG format and is not corrupted
+
+### Issue: Low prediction accuracy
+
+**Solution**:
+
+- Add more training data to the Dataset folders
+- Increase epochs in `train.py`
+- Check if images are clear and properly preprocessed
+
+### Issue: Out of Memory error during training
+
+**Solution**: Reduce batch size in `train.py`:
+
+```python
+batch_size = 8  # Reduce from 16
+```
+
+## �📞 Support
 
 For issues, questions, or suggestions, please open an issue on GitHub or contact the development team.
 
