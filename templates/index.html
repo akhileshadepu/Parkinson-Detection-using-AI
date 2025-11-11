@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkinson’s Detection using AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #ffffff);
+            color: #2c3e50;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            width: 100%;
+            background: #1565c0;
+            color: white;
+            padding: 25px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1em;
+            color: #e3f2fd;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6em;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 50px 60px;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        /* Left Info Section */
+        .info-section {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 6px solid #1565c0;
+        }
+
+        .info-section h2 {
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+
+        .info-section p {
+            margin-bottom: 15px;
+            line-height: 1.7em;
+            color: #444;
+        }
+
+        .info-section ul {
+            margin-left: 20px;
+            line-height: 1.7em;
+            color: #333;
+        }
+
+        /* Right Prediction Panel */
+        .container {
+            flex: 1;
+            min-width: 320px;
+            max-width: 480px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-3px);
+        }
+
+        .upload-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-size: 1.1em;
+            color: #34495e;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px dashed #1565c0;
+            border-radius: 10px;
+            background-color: #f0f8ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            background-color: #e3f2fd;
+        }
+
+        button {
+            margin-top: 20px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1em;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #0d47a1;
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 25px;
+            background-color: #f9fbff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .result h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .confidence {
+            font-weight: 600;
+            color: #16a085;
+            margin-bottom: 10px;
+        }
+
+        .result img {
+            max-width: 280px;
+            margin-top: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        footer {
+            margin-top: auto;
+            background: #1565c0;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #90caf9;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            main {
+                flex-direction: column;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🧠 Parkinson’s Handwriting Detection AI</h1>
+        <p>
+            A healthcare-oriented deep learning system built using <strong>TensorFlow</strong> and <strong>Flask</strong> 
+            to help analyze handwriting patterns and assist in early Parkinson’s screening.
+        </p>
+    </header>
+
+    <main>
+        <!-- 🩺 Information Panel -->
+        <div class="info-section">
+            <h2>What is Parkinson’s Disease?</h2>
+            <p>
+                Parkinson’s disease (PD) is a neurodegenerative disorder that affects movement control. 
+                It often causes tremors, stiffness, and difficulty with handwriting, known as 
+                <em>micrographia</em>—where handwriting becomes small and cramped.
+            </p>
+            <h2>Why Handwriting?</h2>
+            <p>
+                Changes in handwriting are one of the earliest visible signs of Parkinson’s. 
+                By analyzing these patterns with artificial intelligence, we can potentially assist in 
+                <strong>early detection</strong> and clinical research support.
+            </p>
+            <h2>How This Project Works</h2>
+            <ul>
+                <li>Uses a pre-trained <strong>MobileNetV2</strong> CNN model fine-tuned on handwriting samples.</li>
+                <li>Processes the uploaded handwriting image to detect Parkinson’s-like patterns.</li>
+                <li>Outputs prediction (Healthy / Parkinson) with confidence percentage.</li>
+                <li>Serves as an AI-assisted healthcare screening tool.</li>
+            </ul>
+        </div>
+
+        <!--  Upload & Prediction Panel -->
+        <div class="container">
+            <form method="POST" enctype="multipart/form-data">
+                <label class="upload-label">Upload Handwriting Sample:</label>
+                <input type="file" name="file" accept="image/*" required>
+                <button type="submit">🔍 Predict</button>
+            </form>
+
+            {% if result %}
+            <div class="result">
+                <h3>Prediction Result:</h3>
+                <p style="font-size: 1.2em; color: {{ 'green' if result == 'Healthy' else 'red' }};">
+                    <strong>{{ result }}</strong>
+                </p>
+                {% if confidence %}
+                <p class="confidence">Confidence: {{ confidence }}%</p>
+                {% endif %}
+                {% if image_path %}
+                <img src="{{ image_path }}" alt="Uploaded Image">
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Parkinson’s AI Project — Developed by Akhilesh Adepu • Eshwar Prasad • Vyshnavi • Valmi • Powered by TensorFlow & Flask</p>
+    </footer>
+</body>
+</html>
